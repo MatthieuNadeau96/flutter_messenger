@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  AuthForm(this.submitFn);
+  AuthForm(
+    this.submitFn,
+    this.isLoading,
+  );
+  final bool isLoading;
   final void Function(
     String email,
-    String password,
     String username,
+    String password,
     bool isLogin,
     BuildContext ctx,
   ) submitFn;
@@ -16,7 +20,7 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
-  var _isLogin = true;
+  var _isLogin = false;
   String _userEmail = '';
   String _userName = '';
   String _userPassword = '';
@@ -26,14 +30,14 @@ class _AuthFormState extends State<AuthForm> {
     FocusScope.of(context).unfocus();
     if (isValid) {
       _formKey.currentState.save();
+      widget.submitFn(
+        _userEmail.trim(),
+        _userName.trim(),
+        _userPassword.trim(),
+        _isLogin,
+        context,
+      );
     }
-    widget.submitFn(
-      _userEmail,
-      _userName,
-      _userPassword,
-      _isLogin,
-      context,
-    );
     // send auth requrest
   }
 
@@ -102,27 +106,30 @@ class _AuthFormState extends State<AuthForm> {
                       _userPassword = value;
                     },
                   ),
-                  SizedBox(height: 12),
-                  RaisedButton(
-                    child: Text(
-                      _isLogin ? 'Login' : 'Signup',
+                  SizedBox(height: 30),
+                  if (widget.isLoading) CircularProgressIndicator(),
+                  if (!widget.isLoading)
+                    RaisedButton(
+                      child: Text(
+                        _isLogin ? 'Login' : 'Signup',
+                      ),
+                      onPressed: () {
+                        _trySubmit();
+                      },
                     ),
-                    onPressed: () {
-                      _trySubmit();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(
-                      _isLogin
-                          ? 'Create new account'
-                          : 'Already have an account',
+                  if (!widget.isLoading)
+                    FlatButton(
+                      child: Text(
+                        _isLogin
+                            ? 'Create new account'
+                            : 'Already have an account',
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isLogin = !_isLogin;
+                        });
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _isLogin = !_isLogin;
-                      });
-                    },
-                  ),
                 ],
               ),
             ),
