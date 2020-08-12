@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_messenger/screens/auth_screen.dart';
 import 'package:flutter_messenger/screens/chat_screen.dart';
+import 'package:flutter_messenger/screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.onAuthStateChanged,
         builder: (ctx, userSnapshot) {
+          if (userSnapshot.connectionState == ConnectionState.waiting) {
+            return SplashScreen();
+          }
           if (userSnapshot.hasData) {
             return ChatScreen();
           }
