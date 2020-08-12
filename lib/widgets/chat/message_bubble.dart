@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble(
-    this.message,
-    this.isMe,
-  );
+  MessageBubble(this.message, this.isMe, {this.key});
 
+  final Key key;
   final String message;
   final bool isMe;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Container(
           constraints: BoxConstraints(
@@ -29,6 +28,7 @@ class MessageBubble extends StatelessWidget {
             message,
             style: TextStyle(
               color: isMe ? Colors.white : Colors.black,
+              fontSize: 16,
             ),
           ),
         ),

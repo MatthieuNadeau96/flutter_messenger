@@ -18,6 +18,32 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD0xe7bpaJmbRdlcd_TLQ1LNxVNExuunb8",
+      authDomain: "flutter-messenger-48b0e.firebaseapp.com",
+      databaseURL: "https://flutter-messenger-48b0e.firebaseio.com",
+      projectId: "flutter-messenger-48b0e",
+      storageBucket: "flutter-messenger-48b0e.appspot.com",
+      messagingSenderId: "127814753374",
+      appId: "1:127814753374:web:0407696ebbe931953468cf",
+      measurementId: "G-FZQ0JPTQFR"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
