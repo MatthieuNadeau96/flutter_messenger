@@ -78,7 +78,12 @@ class _AuthScreenState extends State<AuthScreen> {
               child: SizedBox(
                 height: 150,
                 width: 150,
-                child: Placeholder(),
+                child: Container(
+                  child: Image.asset(
+                    'chat-icon.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
           ),
