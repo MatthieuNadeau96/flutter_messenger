@@ -71,9 +71,24 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AuthForm(
-        _submitAuthForm,
-        _isLoading,
+      body: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: SizedBox(
+                height: 150,
+                width: 150,
+                child: Placeholder(),
+              ),
+            ),
+          ),
+          Expanded(
+            child: AuthForm(
+              _submitAuthForm,
+              _isLoading,
+            ),
+          ),
+        ],
       ),
     );
   }

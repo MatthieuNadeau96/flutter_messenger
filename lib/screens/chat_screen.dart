@@ -11,32 +11,34 @@ class ChatScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text('Chat Screen'),
           actions: [
-            DropdownButton(
-              icon: Icon(
-                Icons.more_vert,
-                color: Theme.of(context).primaryIconTheme.color,
-              ),
-              items: [
-                DropdownMenuItem(
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.exit_to_app,
-                        ),
-                        SizedBox(width: 10),
-                        Text('Logout'),
-                      ],
-                    ),
-                  ),
-                  value: 'logout',
+            DropdownButtonHideUnderline(
+              child: DropdownButton(
+                icon: Icon(
+                  Icons.more_vert,
+                  color: Theme.of(context).primaryIconTheme.color,
                 ),
-              ],
-              onChanged: (itemIdentifier) {
-                if (itemIdentifier == 'logout') {
-                  FirebaseAuth.instance.signOut();
-                }
-              },
+                items: [
+                  DropdownMenuItem(
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.exit_to_app,
+                          ),
+                          SizedBox(width: 10),
+                          Text('Logout'),
+                        ],
+                      ),
+                    ),
+                    value: 'logout',
+                  ),
+                ],
+                onChanged: (itemIdentifier) {
+                  if (itemIdentifier == 'logout') {
+                    FirebaseAuth.instance.signOut();
+                  }
+                },
+              ),
             ),
           ],
         ),
